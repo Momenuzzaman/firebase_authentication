@@ -13,14 +13,16 @@ function App() {
     signInWithPopup(auth, provider)
       .then((result) => {
         const { displayName, photoURL, email } = result.user;
-        console.log(user)
         const loggedInUser = {
           name: displayName,
           photo: photoURL,
           email: email
         };
         setUser(loggedInUser);
+      }).catch((error) => {
+        console.log(error.message);
       })
+
   }
   return (
     <div className="App">
