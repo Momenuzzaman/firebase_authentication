@@ -29,8 +29,13 @@ function App() {
   const handleGitHubSingIn = () => {
     signInWithPopup(auth, gitHubProvider)
       .then((result) => {
-        const user = result.user;
-        console.log(user)
+        const { displayName, photoURL, email } = result.user;
+        const loggedInUser = {
+          name: displayName,
+          email: email,
+          photoURL: photoURL
+        }
+        setUser(loggedInUser)
       })
 
   }
@@ -39,7 +44,7 @@ function App() {
       <button onClick={handleGoogleSignIn}>Google Sign In</button>
       <button onClick={handleGitHubSingIn}>GitHub Sing In</button>
       {
-        user.email && <div>
+        user.name && <div>
           <h1>Welcome  {user.name}</h1>
           <h3>I know your email {user.email}</h3>
           <img src={user.photoUrl} alt=''></img>
